@@ -1,73 +1,225 @@
-# React + TypeScript + Vite
+🏦 Online Bank Mini System
+📌 Project Overview
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The Online Bank Mini System is a production-quality frontend application that simulates core banking operations such as account creation, deposits, withdrawals, and money transfers.
 
-Currently, two official plugins are available:
+The project is designed to demonstrate strong validation logic, correct transaction handling, clean UI/UX, and a modular, scalable architecture, while intentionally avoiding unnecessary backend complexity as per the assignment scope.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The application is fully deployed and publicly accessible.
 
-## React Compiler
+🎯 Objective
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+This project was built to evaluate:
 
-## Expanding the ESLint configuration
+Validation and business logic correctness
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Transaction handling and error management
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Clean, usable, multi-page UI
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Code structure and separation of concerns
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Readiness for real-world extension
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+🧱 Tech Stack
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Frontend: React + TypeScript
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Styling: Tailwind CSS
+
+State Management: In-memory store (no database)
+
+Routing: React Router
+
+Deployment: Vercel
+
+Version Control: GitHub
+
+📦 Data Model
+type BankAccount = {
+accountNo: string;
+holderName: string;
+balance: number;
+isKYCVerified: boolean;
+};
+
+✅ Functional Features
+
+1. Create Account
+
+Create a new bank account
+
+Account number must be unique
+
+Initial balance cannot be negative
+
+KYC status selectable during creation
+
+2. Deposit Money
+
+Deposit only into existing accounts
+
+Amount must be greater than zero
+
+Balance updates correctly
+
+Success or error feedback shown to user
+
+3. Withdraw Money
+
+Account must exist
+
+Withdrawal amount must be greater than zero
+
+Prevents overdraft
+
+Proper validation messages displayed
+
+4. Transfer Money
+
+Function signature:
+
+transferMoney(senderAccountNo, receiverAccountNo, amount)
+
+Mandatory Validations:
+
+Sender account exists
+
+Receiver account exists
+
+Sender must be KYC verified
+
+Sender must have sufficient balance
+
+Transfer amount must be greater than zero
+
+Sender and receiver cannot be the same
+
+All validation failures return clear, human-readable error messages.
+
+🖥️ UI Features
+
+Multi-page dashboard layout
+
+Sidebar navigation
+
+Dedicated pages for:
+
+Account creation
+
+Deposit
+
+Withdraw
+
+Transfer
+
+Account listing screen with:
+
+Account number
+
+Holder name
+
+Balance
+
+KYC status
+
+Real-time output/logs panel
+
+Toast notifications for success and errors
+
+UI is designed to be clean, usable, and professional, similar to an internal banking dashboard.
+
+🧠 Architecture Overview
+src/
+├─ core/ // Business logic & validations
+│ ├─ bank.ts
+│ └─ validations.ts
+│
+├─ store/ // In-memory state
+│ ├─ accounts.ts
+│ ├─ logs.tsx
+│ └─ toast.tsx
+│
+├─ components/ // Reusable UI components
+│
+├─ pages/ // Route-level screens
+│
+├─ App.tsx
+└─ main.tsx
+
+Key Design Decisions
+
+❌ No business logic inside UI components
+
+✅ All validations centralized in core/
+
+✅ UI and logic cleanly decoupled
+
+✅ Backend-ready architecture
+
+⚠️ Error Handling
+
+All invalid inputs are handled gracefully
+
+User-friendly messages shown via UI notifications
+
+No silent failures
+
+Application never crashes due to invalid operations
+
+🚀 Deployment
+
+Application deployed on Vercel
+
+Publicly accessible live URL
+
+🔗 Live Demo:
+
+Add your Vercel URL here
+
+🎥 Demo Video
+
+A 2-minute demo video is included showing:
+
+Account creation
+
+Deposit
+
+Withdrawal
+
+Transfer (success and failure cases)
+
+Brief explanation of validation logic
+
+🧾 Git Commit Strategy
+
+Minimum 3 meaningful commits:
+
+Core banking logic and validations
+
+UI components and routing
+
+Deployment, polish, and documentation
+
+🧪 How to Run Locally
+git clone <repository-url>
+cd online-bank-mini-system
+npm install
+npm run dev
+
+📈 Scope & Future Enhancements
+
+This project intentionally avoids backend and database usage to stay within the assignment scope.
+However, the architecture is designed to easily support:
+
+REST APIs
+
+Database persistence
+
+Authentication
+
+Multi-user access
+
+👨‍💻 Author
+
+Built as part of a technical evaluation to demonstrate logic building, clean architecture, and UI engineering best practices.
