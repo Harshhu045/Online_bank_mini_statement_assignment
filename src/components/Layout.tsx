@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import Toast from "./Toast";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -35,6 +36,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {/* Main */}
       <main className="flex-1 p-8 space-y-6">
         {children}
+        <Toast/>
       </main>
     </div>
   );

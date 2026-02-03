@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createAccount } from "../core/bank";
+import { useToast } from "../store/toast";
 
 type Props = {
   onLog: (msg: string) => void;
@@ -10,18 +11,16 @@ export default function CreateAccount({ onLog }: Props) {
   const [holderName, setHolderName] = useState("");
   const [balance, setBalance] = useState(0);
   const [kyc, setKyc] = useState(false);
+  const { showToast } = useToast();
 
   const handleCreate = () => {
     try {
-      const msg = createAccount(
-        accountNo,
-        holderName,
-        balance,
-        kyc
-      );
+      const msg = createAccount(accountNo, holderName, balance, kyc);
       onLog(msg);
+      showToast("Account created successfully", "success");
     } catch (e: any) {
       onLog(e.message);
+      showToast(e.message, "error");
     }
   };
 
